@@ -2,7 +2,7 @@ version: "3"
 services:
 
   oj-redis:
-    image: redis:4.0-alpine
+    image: redis
     container_name: oj-redis
     restart: always
     volumes:
@@ -52,7 +52,8 @@ services:
       - oj-postgres
       - judge-server
     volumes:
-      - ./data/backend:/data
+      # - ./data/backend:/data
+      - ./dist:/app/dist
     environment:
       - POSTGRES_DB=onlinejudge
       - POSTGRES_USER=onlinejudge
@@ -61,5 +62,5 @@ services:
       # - FORCE_HTTPS=1
       # - STATIC_CDN_HOST=cdn.oj.com
     ports:
-      - "0.0.0.0:80:8000"
-      - "0.0.0.0:443:1443"
+      - "127.0.0.1:80:8000"
+      # - "0.0.0.0:443:1443"
